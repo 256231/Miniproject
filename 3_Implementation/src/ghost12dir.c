@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<time.h>
 #include<stdbool.h>
-//#include<windows.h>
+#include<windows.h>
 #include "header.h"
 
 #define ROW 21

@@ -1,9 +1,9 @@
-//#include<stdlib.h>
+#include<stdlib.h>
 #include<stdio.h>
 #include<time.h>
 #include<stdbool.h>
-//#include<windows.h>
-#include<conio.h>
+#include<windows.h>
+
 #include "header.h"
 #define ROW 21
 #define COL 72
@@ -990,9 +990,9 @@ ghost2_direction();
 
  while(count)
  {
-    if(_kbhit()){
+    if( system("PAUSE"))
 
-       ch=_getch();
+       ch=getchar();
      switch(ch)
       {
         case '/':
