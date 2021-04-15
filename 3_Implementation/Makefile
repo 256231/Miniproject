@@ -1,17 +1,14 @@
 # Name of the project
 PROJECT_NAME = Pacman
 
-# Output directory
-BUILD = build
+
 
 # All source code files
-SRC = main.c\
-src/ghost12dir.c
+SRC = src/ghost12dir.c
 
 
 # All test source files
-TEST_SRC = src/calculator_operations.c\
-test/test_calculator_operations.c\
+TEST_SRC = test/test.c\
 unity/unity.c\
 
 TEST_OUTPUT = $(BUILD)/Test_$(PROJECT_NAME).out
@@ -20,46 +17,42 @@ TEST_OUTPUT = $(BUILD)/Test_$(PROJECT_NAME).out
 INC	= -Iinc\
 -Iunity\
 
-#Library Inlcudes
-#if working with CUnit 
-#INCLUDE_LIBS = 
-INCLUDE_LIBS = -lcunit
+#To check if the OS is Windows or Linux and set the executable file extension and delete command accordingly
+ifdef OS
+   RM = del /q
+   FixPath = $(subst /,\,$1)
+   EXEC = exe
+else
+   ifeq ($(shell uname), Linux)
+      RM = rm -rf
+      FixPath = $1
+	  EXEC = out
+   endif
+endif
 
-# Project Output name
-PROJECT_OUTPUT = $(BUILD)/$(PROJECT_NAME).out
+# Makefile will not run target command if the name with file already exists. To override, use .PHONY
+.PHONY : all test coverage run clean doc
 
-# Document files
-DOCUMENTATION_OUTPUT = documentation/html
+all:$(BUILD_DIR)
+	gcc main.c $(SRC) $(INC) -lm -o $(call FixPath,$(PROJ_NAME).$(EXEC))
 
-# Default target built
-$(PROJECT_NAME):all
+run: all
+	$(call FixPath,./$(PROJ_NAME).$(EXEC))
 
-# Run the target even if the matching name exists
-.PHONY: run clean test doc all
+test: $(SRC) $(TEST_SRC)
+	gcc $(SRC) $(TEST_SRC) $(INC) -lm -o $(TEST_PROJ_NAME).$(EXEC)
+	./$(TEST_PROJ_NAME).$(EXEC)
 
-all: $(SRC) $(BUILD)
-	gcc $(SRC) $(INC) -o $(PROJECT_OUTPUT).out
+coverage:${PROJECT_NAME}
+	gcc -fprofile-arcs -ftest-coverage $(SRC) $(TEST_SRC) $(INC) -lm -o $(call FixPath,$(TEST_PROJ_NAME).$(EXEC))
+	$(call FixPath,./$(TEST_PROJ_NAME).$(EXEC))
+	gcov -a main.c
+	$(RM) *.gcda
+	$(RM) *.gcno
 
-# Call `make run` to run the application
-run:$(PROJECT_NAME)
-	./$(PROJECT_OUTPUT).out
+valgrind: all
+	valgrind ./$(TEST_PROJ_NAME).$(EXEC)
 
-# Document the code using Doxygen
-doc:
-	make -C ./documentation
-
-# Build and run the unit tests
-test:$(BUILD)
-	gcc $(TEST_SRC) $(INC) -o $(TEST_OUTPUT)
-	./$(TEST_OUTPUT)
-
-
-# Remove all the built files, invoke by `make clean`
 clean:
-	del *.DAT
-	del *.$(EXEC)
-	rm -rf $(BUILD) $(DOCUMENTATION_OUTPUT)
-
-# Create new build folder if not present
-$(BUILD):
-	mkdir build
+	$(RM) *.gcda
+	$(RM) *.gcno
