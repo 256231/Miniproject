@@ -991,9 +991,9 @@ ghost2_direction();
 
  while(count)
  {
-    if( system("PAUSE"))
+    
 
-       {ch=getchar();
+       ch=getchar();
      switch(ch)
       {
         case '/':
@@ -1023,7 +1023,7 @@ ghost2_direction();
         default:;
 
       }
-    }
+    
 
     if(layout[row1ghost][col1ghost]==layout[row1][col1]||layout[row1ghost][col1ghost]==layout[row2][col2]||layout[row2ghost][col2ghost]==layout[row1][col1]||layout[row2ghost][col2ghost]==layout[row2][col2])
     {
