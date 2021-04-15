@@ -15,7 +15,7 @@ extern int row2ghost,col2ghost,ghost11,ghost22;
 
 
 extern char grid[ROW][COL];
-void ghost1_direction()
+int ghost1_direction(int a)
 {
     int ghost1;
     srand((unsigned) time(NULL));
@@ -31,9 +31,9 @@ void ghost1_direction()
        ghost1_dir=LEFT1;
     else
         ghost1_dir=RIGHT1;
+        return 1;
 }
-
-void ghost2_direction()
+int ghost2_direction(int a)
     {
         int ghost2;
         //srand((unsigned) time(NULL));
@@ -49,4 +49,5 @@ void ghost2_direction()
         ghost2_dir=RIGHT1;
 
         ghost22=ghost2;
+        return 1;
     }

@@ -983,11 +983,11 @@ col1ghost=43;
 row2ghost=19;
 col2ghost=18;
 char ch;
-
+int a=1;
 
  print_layout();
-ghost1_direction();
-ghost2_direction();
+int qwe = ghost1_direction(a);
+int ret = ghost2_direction(a);
 
  while(count)
  {
