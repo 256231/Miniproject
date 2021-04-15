@@ -1,4 +1,4 @@
-#include<stdlib.h>
+//#include<stdlib.h>
 #include<stdio.h>
 #include<time.h>
 #include<stdbool.h>
@@ -981,12 +981,8 @@ col1ghost=43;
 row2ghost=19;
 col2ghost=18;
 char ch;
-int* ptr;
-    int bb=2;
-    ptr= (int*)malloc(bb*sizeof(int));
-    if(ptr==NULL)
-    exit(0);
-    free(ptr);
+
+
  print_layout();
 ghost1_direction();
 ghost2_direction();
