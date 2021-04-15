@@ -38,11 +38,7 @@ char layout[ROW][COL]= {
 "*                 $                                                   *",
 "***********************************************************************"};
 void print_layout()
-{   int* ptr;
-    int bb=2;
-    ptr= (int*)malloc(bb*sizeof(int));
-    if(ptr==NULL)
-    exit(0);
+{   
     int i;
 
     for(i=0;i<ROW;i++)
@@ -51,7 +47,7 @@ void print_layout()
     printf("\ng2:%d dir: %d\n",ghost22,ghost2_dir);
 
     printf("\ng2:%d g2:%d\n",row2ghost,col2ghost);
-    free(ptr);
+    
 
 }
 void move_car(enum move dir)
@@ -985,6 +981,12 @@ col1ghost=43;
 row2ghost=19;
 col2ghost=18;
 char ch;
+int* ptr;
+    int bb=2;
+    ptr= (int*)malloc(bb*sizeof(int));
+    if(ptr==NULL)
+    exit(0);
+    free(ptr);
  print_layout();
 ghost1_direction();
 ghost2_direction();
