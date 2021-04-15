@@ -987,7 +987,7 @@ int a=1;
 
  print_layout();
 int qwe = ghost1_direction(a);
-int ret = ghost2_direction(a);
+ghost22 = ghost2_direction(ghost22);
 
  while(count)
  {

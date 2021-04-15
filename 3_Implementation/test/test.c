@@ -7,13 +7,13 @@ void setUp(){}
 void tearDown(){}
 void ghost1_direction_test()
 {
-    TEST_ASSERT_EQUAL(ghost1_direction(1),1);
+    TEST_ASSERT_EQUAL(1,ghost1_direction(1));
 }
 
-void ghost2_direction_test()
+/*void ghost2_direction_test()
     {
-        TEST_ASSERT_EQUAL(ghost2_direction(1),1);
-    }
+        TEST_ASSERT_EQUAL(1,ghost2_direction(1));
+    }*/
 
 int main()
 {

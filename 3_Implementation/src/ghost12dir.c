@@ -48,6 +48,7 @@ int ghost2_direction(int a)
     else
         ghost2_dir=RIGHT1;
 
-        ghost22=ghost2;
-        return 1;
+         ghost22=ghost2;
+
+        return ghost22;
     }
