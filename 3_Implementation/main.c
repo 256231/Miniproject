@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<time.h>
 #include<stdbool.h>
+#include<cstdlib> 
 //#include<windows.h>
 
 #include "header.h"
@@ -992,7 +993,7 @@ ghost2_direction();
  {
     if( system("PAUSE"))
 
-       ch=getchar();
+       {ch=getchar();
      switch(ch)
       {
         case '/':
@@ -1034,7 +1035,7 @@ ghost2_direction();
     ghost1_move(ghost1_dir);
 
     ghost2_move(ghost2_dir);
-    Beep(400,150);
+   // Beep(400,150);
     system("cls");
     print_layout();
 
