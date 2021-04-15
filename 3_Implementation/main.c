@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<time.h>
 #include<stdbool.h>
-#include<cstdlib> 
+
 //#include<windows.h>
 
 #include "header.h"
