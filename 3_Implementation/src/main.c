@@ -88,6 +88,7 @@ void ghost_dir_final(enum move dir)
         direction = LT;
         break;
        }
+       
        case 5:{
            y=rand()%2;
            if(y==0)
