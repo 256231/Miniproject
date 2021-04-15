@@ -1,10 +1,36 @@
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<windows.h>
 #include<time.h>
+#include "header.h"
 
-int right,left,up,down;
-int gR,gC;
+#define ROW 16
+#define COL 16
+
+enum move {LT,RT,UP,DN,STP}direction;
+
+char block = 219;
+int gR,gC;  // track ghost row and column
+int right,left,up,down; 
+
+char grid[ROW][COL] ={
+"|||||||||||||||",
+"|      @      |",
+"| ||| | | | | |",
+"| |   | | | | |",
+"| | ||| | | | |",
+"|       | | | |",
+"| | ||| | | | |",
+"| | |   | |   |",
+"| | | ||| ||| |",
+"|             |",
+"| ||||||| ||| |",
+"|    |        |",
+"| || | || ||| |",
+"| || | || ||| |",
+"|             |",
+"|||||||||||||||"};
 
 int main()
 {
