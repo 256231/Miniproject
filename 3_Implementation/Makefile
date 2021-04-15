@@ -9,9 +9,9 @@ SRC = src/ghost12dir.c
 
 # All test source files
 TEST_SRC = test/test.c\
-unity/unity.c\
+unity/unity.c
 
-TEST_OUTPUT = $(BUILD)/Test_$(PROJECT_NAME).out
+
 
 # All include folders with header files
 INC	= -Iinc\
