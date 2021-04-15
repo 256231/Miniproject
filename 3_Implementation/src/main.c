@@ -41,7 +41,8 @@ void print_layout()
 {   int* ptr;
     int bb=2;
     ptr= (int*)malloc(bb*sizeof(int));
-    
+    if(ptr==NULL)
+    exit(0);
     int i;
 
     for(i=0;i<ROW;i++)
