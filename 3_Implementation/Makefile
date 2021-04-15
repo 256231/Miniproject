@@ -5,8 +5,9 @@ PROJECT_NAME = Pacman
 BUILD = build
 
 # All source code files
-SRC = project_main.c\
-src/calculator_operations.c
+SRC = main.c\
+src/ghost12dir.c
+
 
 # All test source files
 TEST_SRC = src/calculator_operations.c\
@@ -21,8 +22,8 @@ INC	= -Iinc\
 
 #Library Inlcudes
 #if working with CUnit 
-#INCLUDE_LIBS = -lcunit
-INCLUDE_LIBS =
+#INCLUDE_LIBS = 
+INCLUDE_LIBS = -lcunit
 
 # Project Output name
 PROJECT_OUTPUT = $(BUILD)/$(PROJECT_NAME).out
@@ -44,20 +45,19 @@ run:$(PROJECT_NAME)
 	./$(PROJECT_OUTPUT).out
 
 # Document the code using Doxygen
-#doc:
-#	make -C ./documentation
+doc:
+	make -C ./documentation
 
 # Build and run the unit tests
 test:$(BUILD)
 	gcc $(TEST_SRC) $(INC) -o $(TEST_OUTPUT)
 	./$(TEST_OUTPUT)
-#Coverage
-coverageCheck:$(BUILD)
-	g++ -fprofile-arcs -ftest-coverage -fPIC -O0 $(TEST_SRC) $(INC) -o $(TEST_OUTPUT)
-	./$(TEST_OUTPUT)
+
 
 # Remove all the built files, invoke by `make clean`
 clean:
+	del *.DAT
+	del *.$(EXEC)
 	rm -rf $(BUILD) $(DOCUMENTATION_OUTPUT)
 
 # Create new build folder if not present

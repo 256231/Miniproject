@@ -3,7 +3,6 @@
 #include<time.h>
 #include<stdbool.h>
 #include<windows.h>
-#include<conio.h>
 #include "header.h"
 #define ROW 21
 #define COL 72
