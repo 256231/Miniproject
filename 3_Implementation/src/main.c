@@ -10,12 +10,12 @@
 
 
 
-int car_1r,car_1c,car_2r,car_2c;
-int ghost1_r, ghost1_c;
-int ghost2_r,ghost2_c,ghost11,ghost22;
+int row1,col1,row2,col2;
+int row1ghost, col1ghost;
+int row2ghost,col2ghost,ghost11,ghost22;
 
 
-char grid[ROW][COL]= {
+char layout[ROW][COL]= {
 "***********************************************************************",
 "*                                          &                          *",
 "*   ********   *********   ***************   ********************     *",
@@ -35,73 +35,73 @@ char grid[ROW][COL]= {
 "*   *                          *   *                            *     *",
 "*   *                          *   *                            *     *",
 "*   ****************************   ******************************     *",
-"*                 @                                                   *",
+"*                 $                                                   *",
 "***********************************************************************"};
-void print_grid()
+void print_layout()
 {
     int i;
 
     for(i=0;i<ROW;i++)
-    printf("%s\n",grid[i]);
+    printf("%s\n",layout[i]);
 
     printf("\ng2:%d dir: %d\n",ghost22,ghost2_dir);
 
-    printf("\ng2:%d g2:%d\n",ghost2_r,ghost2_c);
+    printf("\ng2:%d g2:%d\n",row2ghost,col2ghost);
 
 }
 void move_car(enum move dir)
 {
     if(dir==UP)
     {
-        if(grid[car_1r-1][car_1c]!= '*'& grid[car_2r-1][car_2c]!='*')
+        if(layout[row1-1][col1]!= '*'& layout[row2-1][col2]!='*')
         {
-           grid[car_1r][car_1c]=' ';
-           grid[car_1r-1][car_1c]=':';
-           grid[car_2r][car_2c]=' ';
-           grid[car_2r-1][car_2c]=':';
-           car_1r--;
-           car_2r--;
+           layout[row1][col1]=' ';
+           layout[row1-1][col1]=':';
+           layout[row2][col2]=' ';
+           layout[row2-1][col2]=':';
+           row1--;
+           row2--;
             //printf("\nUP UP UP\n");
         }
     }
     else if(dir==DOWN)
 
     {
-        if(grid[car_1r+1][car_1c]!= '*'& grid[car_2r+1][car_2c]!='*')
+        if(layout[row1+1][col1]!= '*'& layout[row2+1][col2]!='*')
       {
-           grid[car_1r][car_1c]=' ';
-           grid[car_1r+1][car_1c]=':';
-           grid[car_2r][car_2c]=' ';
-           grid[car_2r+1][car_2c]=':';
-           car_1r++;
-           car_2r++;
+           layout[row1][col1]=' ';
+           layout[row1+1][col1]=':';
+           layout[row2][col2]=' ';
+           layout[row2+1][col2]=':';
+           row1++;
+           row2++;
            //printf("\nDOWN\n");
       }
     }
     if(dir==LEFT)
     {
-       if(grid[car_1r][car_1c-1]!= '*'& grid[car_2r][car_2c-1]!='*')
+       if(layout[row1][col1-1]!= '*'& layout[row2][col2-1]!='*')
        {
-           grid[car_1r][car_1c]=' ';
-           grid[car_1r][car_1c-1]=':';
-           grid[car_2r][car_2c]=' ';
-           grid[car_2r][car_2c-1]=':';
-           car_1c--;
-           car_2c--;
+           layout[row1][col1]=' ';
+           layout[row1][col1-1]=':';
+           layout[row2][col2]=' ';
+           layout[row2][col2-1]=':';
+           col1--;
+           col2--;
       }
     }
     else if(dir==RIGHT)
 
     {
-       if(grid[car_1r][car_1c+1]!= '*'& grid[car_2r][car_2c+1]!='*')
+       if(layout[row1][col1+1]!= '*'& layout[row2][col2+1]!='*')
        {
-           grid[car_2r][car_2c]=' ';
-           grid[car_2r][car_2c+1]=':';
-           grid[car_1r][car_1c]=' ';
-           grid[car_1r][car_1c+1]=':';
+           layout[row2][col2]=' ';
+           layout[row2][col2+1]=':';
+           layout[row1][col1]=' ';
+           layout[row1][col1+1]=':';
 
-           car_1c++;
-           car_2c++;
+           col1++;
+           col2++;
        }
     }
 }
@@ -112,13 +112,13 @@ void ghost1_move(enum ghost_move g1_dir)
   if(g1_dir==UP1)
   {
 
-      if(grid[ghost1_r-1][ghost1_c]!= '*')
+      if(layout[row1ghost-1][col1ghost]!= '*')
       {
-          grid[ghost1_r][ghost1_c]=' ';
-          grid[ghost1_r-1][ghost1_c]='&';
-          ghost1_r--;
+          layout[row1ghost][col1ghost]=' ';
+          layout[row1ghost-1][col1ghost]='&';
+          row1ghost--;
 
-          if(grid[ghost1_r][ghost1_c]==grid[1][12]||grid[ghost1_r][ghost1_c]==grid[1][24]||grid[ghost1_r][ghost1_c] == grid[1][43])
+          if(layout[row1ghost][col1ghost]==layout[1][12]||layout[row1ghost][col1ghost]==layout[1][24]||layout[row1ghost][col1ghost] == layout[1][43])
           {
               x=rand()%2;
                 switch (x)
@@ -139,7 +139,7 @@ void ghost1_move(enum ghost_move g1_dir)
           }
 
 
-          else if(grid[ghost1_r][ghost1_c]==grid[8][3])
+          else if(layout[row1ghost][col1ghost]==layout[8][3])
             {
                 x=rand()%2;
                 switch (x)
@@ -154,7 +154,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
                 }
             }
-         else if(grid[ghost1_r][ghost1_c]==grid[1][3])
+         else if(layout[row1ghost][col1ghost]==layout[1][3])
          {
              x=rand()%2;
             switch (x)
@@ -173,7 +173,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[8][68])
+         else if(layout[row1ghost][col1ghost]==layout[8][68])
          {
              x=rand()%2;
             switch (x)
@@ -188,7 +188,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[1][68])
+         else if(layout[row1ghost][col1ghost]==layout[1][68])
          {
              x=rand()%2;
             switch (x)
@@ -207,7 +207,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[8][33])
+         else if(layout[row1ghost][col1ghost]==layout[8][33])
          {
              x=rand()%2;
             switch (x)
@@ -232,14 +232,14 @@ void ghost1_move(enum ghost_move g1_dir)
   }
   else if (g1_dir==DOWN1)
   {
-      if(grid[ghost1_r+1][ghost1_c]!= '*')
+      if(layout[row1ghost+1][col1ghost]!= '*')
       {
-          grid[ghost1_r][ghost1_c]=' ';
-          grid[ghost1_r+1][ghost1_c]='&';
-          ghost1_r++;
+          layout[row1ghost][col1ghost]=' ';
+          layout[row1ghost+1][col1ghost]='&';
+          row1ghost++;
 
-           if(grid[ghost1_r][ghost1_c]==grid[8][12]||grid[ghost1_r][ghost1_c]
-              ==grid[8][24]||grid[ghost1_r][ghost1_c]== grid[8][43]||grid[ghost1_r][ghost1_c] == grid[19][33])
+           if(layout[row1ghost][col1ghost]==layout[8][12]||layout[row1ghost][col1ghost]
+              ==layout[8][24]||layout[row1ghost][col1ghost]== layout[8][43]||layout[row1ghost][col1ghost] == layout[19][33])
            {
                x=rand()%2;
             switch (x)
@@ -261,7 +261,7 @@ void ghost1_move(enum ghost_move g1_dir)
            }
 
 
-           else if(grid[ghost1_r][ghost1_c]==grid[8][3])
+           else if(layout[row1ghost][col1ghost]==layout[8][3])
          {
              x=rand()%2;
             switch (x)
@@ -276,7 +276,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[19][3])
+         else if(layout[row1ghost][col1ghost]==layout[19][3])
          {
              x=rand()%2;
             switch (x)
@@ -295,7 +295,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[8][68])
+         else if(layout[row1ghost][col1ghost]==layout[8][68])
          {
              x=rand()%2;
             switch (x)
@@ -310,7 +310,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[19][68])
+         else if(layout[row1ghost][col1ghost]==layout[19][68])
          {
              x=rand()%2;
             switch (x)
@@ -335,12 +335,12 @@ void ghost1_move(enum ghost_move g1_dir)
   if(g1_dir==LEFT1)
   {
 
-      if(grid[ghost1_r][ghost1_c-1]!= '*')
+      if(layout[row1ghost][col1ghost-1]!= '*')
       {
-          grid[ghost1_r][ghost1_c]=' ';
-          grid[ghost1_r][ghost1_c-1]='&';
-          ghost1_c--;
-          if(grid[ghost1_r][ghost1_c]==grid[1][12]||grid[ghost1_r][ghost1_c]==grid[1][24]||grid[ghost1_r][ghost1_c] == grid[1][43])
+          layout[row1ghost][col1ghost]=' ';
+          layout[row1ghost][col1ghost-1]='&';
+          col1ghost--;
+          if(layout[row1ghost][col1ghost]==layout[1][12]||layout[row1ghost][col1ghost]==layout[1][24]||layout[row1ghost][col1ghost] == layout[1][43])
           {
               x=rand()%2;
             switch (x)
@@ -355,7 +355,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
           }
-          else if(grid[ghost1_r][ghost1_c]==grid[8][12]||grid[ghost1_r][ghost1_c]==grid[8][24]||grid[ghost1_r][ghost1_c] == grid[8][43])
+          else if(layout[row1ghost][col1ghost]==layout[8][12]||layout[row1ghost][col1ghost]==layout[8][24]||layout[row1ghost][col1ghost] == layout[8][43])
           {
              x=rand()%2;
             switch (x)
@@ -370,7 +370,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
           }
-         else if(grid[ghost1_r][ghost1_c]==grid[8][33])
+         else if(layout[row1ghost][col1ghost]==layout[8][33])
          {
              x=rand()%2;
             switch (x)
@@ -385,7 +385,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[1][3])
+         else if(layout[row1ghost][col1ghost]==layout[1][3])
          {
              x=rand()%2;
             switch (x)
@@ -404,7 +404,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[8][3])
+         else if(layout[row1ghost][col1ghost]==layout[8][3])
          {
              x=rand()%2;
             switch (x)
@@ -423,7 +423,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[19][3])
+         else if(layout[row1ghost][col1ghost]==layout[19][3])
          {
              x=rand()%2;
             switch (x)
@@ -449,13 +449,13 @@ void ghost1_move(enum ghost_move g1_dir)
   }
   else if (g1_dir==RIGHT1)
   {
-      if(grid[ghost1_r][ghost1_c+1]!= '*')
+      if(layout[row1ghost][col1ghost+1]!= '*')
       {
-          grid[ghost1_r][ghost1_c]=' ';
-          grid[ghost1_r][ghost1_c+1]='&';
-          ghost1_c++;
+          layout[row1ghost][col1ghost]=' ';
+          layout[row1ghost][col1ghost+1]='&';
+          col1ghost++;
 
-          if(grid[ghost1_r][ghost1_c]==grid[1][12]||grid[ghost1_r][ghost1_c]==grid[1][24]||grid[ghost1_r][ghost1_c] == grid[1][43])
+          if(layout[row1ghost][col1ghost]==layout[1][12]||layout[row1ghost][col1ghost]==layout[1][24]||layout[row1ghost][col1ghost] == layout[1][43])
           {
 
             x=rand()%2;
@@ -471,7 +471,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
           }
-          else if(grid[ghost1_r][ghost1_c]==grid[8][12]||grid[ghost1_r][ghost1_c]==grid[8][24]||grid[ghost1_r][ghost1_c] == grid[8][43])
+          else if(layout[row1ghost][col1ghost]==layout[8][12]||layout[row1ghost][col1ghost]==layout[8][24]||layout[row1ghost][col1ghost] == layout[8][43])
           {
              x=rand()%2;
             switch (x)
@@ -486,7 +486,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
           }
-          else if(grid[ghost1_r][ghost1_c]==grid[8][33])
+          else if(layout[row1ghost][col1ghost]==layout[8][33])
          {
              x=rand()%2;
             switch (x)
@@ -501,7 +501,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[1][68])
+         else if(layout[row1ghost][col1ghost]==layout[1][68])
          {
              x=rand()%2;
             switch (x)
@@ -520,7 +520,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[8][68])
+         else if(layout[row1ghost][col1ghost]==layout[8][68])
          {
              x=rand()%2;
             switch (x)
@@ -539,7 +539,7 @@ void ghost1_move(enum ghost_move g1_dir)
 
             }
          }
-         else if(grid[ghost1_r][ghost1_c]==grid[19][68])
+         else if(layout[row1ghost][col1ghost]==layout[19][68])
          {
              x=rand()%2;
             switch (x)
@@ -572,13 +572,13 @@ void ghost2_move(enum ghost_move g2_dir)
     if(g2_dir==LEFT1)
     {
 
-        if(grid[ghost2_r][ghost2_c-1]!= '*')
+        if(layout[row2ghost][col2ghost-1]!= '*')
         {
-          grid[ghost2_r][ghost2_c]=' ';
-          grid[ghost2_r][ghost2_c-1]='@';
-          ghost2_c--;
+          layout[row2ghost][col2ghost]=' ';
+          layout[row2ghost][col2ghost-1]='$';
+          col2ghost--;
 
-            if(grid[ghost2_r][ghost2_c]==grid[19][33])
+            if(layout[row2ghost][col2ghost]==layout[19][33])
             {
               x=rand()%2;
               if(x==0||x==1)
@@ -594,7 +594,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
                 }
            }
-            else if(grid[ghost2_r][ghost2_c]==grid[19][3])
+            else if(layout[row2ghost][col2ghost]==layout[19][3])
             {
                  x=rand()%2;
                  if(x==0||x==1)
@@ -614,7 +614,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
                 }
             }
-            if(grid[ghost2_r][ghost2_c]==grid[8][43]||grid[ghost2_r][ghost2_c]==grid[8][24]||grid[ghost2_r][ghost2_c]==grid[8][12])
+            if(layout[row2ghost][col2ghost]==layout[8][43]||layout[row2ghost][col2ghost]==layout[8][24]||layout[row2ghost][col2ghost]==layout[8][12])
             {
                 x=rand()%2;
                 if(x==0||x==1)
@@ -630,7 +630,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
               }
             }
-           else if(grid[ghost2_r][ghost2_c]==grid[8][33])
+           else if(layout[row2ghost][col2ghost]==layout[8][33])
            {
                x=rand()%2;
                if(x==0||x==1)
@@ -646,7 +646,7 @@ void ghost2_move(enum ghost_move g2_dir)
               }
 
            }
-           if(grid[ghost2_r][ghost2_c]==grid[1][3])
+           if(layout[row2ghost][col2ghost]==layout[1][3])
            {
                x=rand()%2;
                if(x==0||x==1)
@@ -665,7 +665,7 @@ void ghost2_move(enum ghost_move g2_dir)
                     }
              }
           }
-          else if(grid[ghost2_r][ghost2_c]==grid[1][12]||grid[ghost2_r][ghost2_c]==grid[1][24]||grid[ghost2_r][ghost2_c]==grid[1][43])
+          else if(layout[row2ghost][col2ghost]==layout[1][12]||layout[row2ghost][col2ghost]==layout[1][24]||layout[row2ghost][col2ghost]==layout[1][43])
           {
               x=rand()%2;
               if(x==0||x==1)
@@ -688,14 +688,14 @@ void ghost2_move(enum ghost_move g2_dir)
     }//if left
       if (g2_dir==RIGHT1)
         {
-            if(grid[ghost2_r][ghost2_c+1]!= '*')
+            if(layout[row2ghost][col2ghost+1]!= '*')
             {
-                grid[ghost2_r][ghost2_c+1]='@';
-                grid[ghost2_r][ghost2_c]=' ';
-                ghost2_c++;
+                layout[row2ghost][col2ghost+1]='$';
+                layout[row2ghost][col2ghost]=' ';
+                col2ghost++;
 
 
-                if(grid[ghost2_r][ghost2_c]==grid[19][33])
+                if(layout[row2ghost][col2ghost]==layout[19][33])
                 {
                     x=rand()%2;
                     if(x==0||x==1)
@@ -711,7 +711,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
                     }
                 }
-               else if(grid[ghost2_r][ghost2_c]==grid[19][68])
+               else if(layout[row2ghost][col2ghost]==layout[19][68])
                  {
                   x=rand()%2;
                   if(x==0||x==1)
@@ -730,7 +730,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
                     }
                 }
-                if(grid[ghost2_r][ghost2_c]==grid[8][43]||grid[ghost2_r][ghost2_c]==grid[8][24]||grid[ghost2_r][ghost2_c]==grid[8][12])
+                if(layout[row2ghost][col2ghost]==layout[8][43]||layout[row2ghost][col2ghost]==layout[8][24]||layout[row2ghost][col2ghost]==layout[8][12])
                 {
 
 
@@ -750,7 +750,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
                     }
                 }
-                else if(grid[ghost2_r][ghost2_c]==grid[8][33])
+                else if(layout[row2ghost][col2ghost]==layout[8][33])
                 {
                     x=rand()%2;
                     if(x==0||x==1)
@@ -774,13 +774,13 @@ void ghost2_move(enum ghost_move g2_dir)
      if (g2_dir==UP1)
      {
 
-             if(grid[ghost2_r-1][ghost2_c]!= '*')
+             if(layout[row2ghost-1][col2ghost]!= '*')
             {
-                grid[ghost2_r][ghost2_c]=' ';
-                grid[ghost2_r-1][ghost2_c]='@';
-                ghost2_r--;
+                layout[row2ghost][col2ghost]=' ';
+                layout[row2ghost-1][col2ghost]='$';
+                row2ghost--;
 
-                if(grid[ghost2_r][ghost2_c]==grid[8][3])
+                if(layout[row2ghost][col2ghost]==layout[8][3])
                 {
 
                     x=rand()%2;
@@ -799,7 +799,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
                     }
                 }
-                else if (grid[ghost2_r][ghost2_c]==grid[8][68])
+                else if (layout[row2ghost][col2ghost]==layout[8][68])
                 {
                     x=rand()%2;
                   if(x==0||x==1)
@@ -817,7 +817,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
                     }
                 }
-                if(grid[ghost2_r][ghost2_c]==grid[8][33])
+                if(layout[row2ghost][col2ghost]==layout[8][33])
                 {
                     x=rand()%2;
                     if(x==0||x==1)
@@ -837,7 +837,7 @@ void ghost2_move(enum ghost_move g2_dir)
                     }
                 }
 
-                if(grid[ghost2_r][ghost2_c]==grid[1][12]||grid[ghost2_r][ghost2_c]==grid[1][24]||grid[ghost2_r][ghost2_c] == grid[1][43])
+                if(layout[row2ghost][col2ghost]==layout[1][12]||layout[row2ghost][col2ghost]==layout[1][24]||layout[row2ghost][col2ghost] == layout[1][43])
                 {
                     x=rand()%2;
                     if(x==0||x==1)
@@ -856,7 +856,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
                     }
                 }
-                else if(grid[ghost2_r][ghost2_c]==grid[1][68])
+                else if(layout[row2ghost][col2ghost]==layout[1][68])
                 {
                     x=rand()%2;
                     if(x==0||x==1)
@@ -875,7 +875,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
                     }
                 }
-                else if(grid[ghost2_r][ghost2_c]==grid[1][3])
+                else if(layout[row2ghost][col2ghost]==layout[1][3])
                 {
                     x=rand()%2;
                     if(x==0||x==1)
@@ -897,13 +897,13 @@ void ghost2_move(enum ghost_move g2_dir)
      }// up1
      if (g2_dir==DOWN1)
      {
-         if(grid[ghost2_r+1][ghost2_c]!= '*')
+         if(layout[row2ghost+1][col2ghost]!= '*')
       {
-          grid[ghost2_r][ghost2_c]=' ';
-          grid[ghost2_r+1][ghost2_c]='@';
-          ghost2_r++;
+          layout[row2ghost][col2ghost]=' ';
+          layout[row2ghost+1][col2ghost]='$';
+          row2ghost++;
 
-           if(grid[ghost2_r][ghost2_c]==grid[8][3])
+           if(layout[row2ghost][col2ghost]==layout[8][3])
            {
                 x=rand()%2;
                 if(x==0||x==1)
@@ -924,7 +924,7 @@ void ghost2_move(enum ghost_move g2_dir)
 
 
            }
-           else if(grid[ghost2_r][ghost2_c]==grid[8][12])
+           else if(layout[row2ghost][col2ghost]==layout[8][12])
            {
              x=rand()%2;
              if(x==0||x==1)
@@ -943,7 +943,7 @@ void ghost2_move(enum ghost_move g2_dir)
                     }
               }
            }
-          else if(grid[ghost2_r][ghost2_c]==grid[8][43])
+          else if(layout[row2ghost][col2ghost]==layout[8][43])
             {
                      x=rand()%2;
                      if(x==0||x==1)
@@ -971,16 +971,16 @@ direction= STOP;
 ghost1_dir = STOP1;
 ghost2_dir = STOP1;
 int i,count=20;
-car_1r = 8;
-car_1c =33;
-car_2r = 8;
-car_2c = 34;
-ghost1_r=1;
-ghost1_c=43;
-ghost2_r=19;
-ghost2_c=18;
+row1 = 8;
+col1 =33;
+row2 = 8;
+col2 = 34;
+row1ghost=1;
+col1ghost=43;
+row2ghost=19;
+col2ghost=18;
 char ch;
- print_grid();
+ print_layout();
 ghost1_direction();
 ghost2_direction();
 
@@ -991,7 +991,7 @@ ghost2_direction();
        ch=_getch();
      switch(ch)
       {
-        case '.':
+        case '/':
 
                 direction=RIGHT;
                 break;
@@ -1003,13 +1003,13 @@ ghost2_direction();
                 break;
 
 
-        case 'l':
+        case ';':
 
                 direction = UP;
                 break;
 
 
-        case '/':
+        case '.':
 
                 direction = DOWN;
                 break;
@@ -1020,7 +1020,7 @@ ghost2_direction();
       }
     }
 
-    if(grid[ghost1_r][ghost1_c]==grid[car_1r][car_1c]||grid[ghost1_r][ghost1_c]==grid[car_2r][car_2c])
+    if(layout[row1ghost][col1ghost]==layout[row1][col1]||layout[row1ghost][col1ghost]==layout[row2][col2]||layout[row2ghost][col2ghost]==layout[row1][col1]||layout[row2ghost][col2ghost]==layout[row2][col2])
     {
         printf("\nGAME OVER\n");
         break;
@@ -1032,7 +1032,7 @@ ghost2_direction();
     ghost2_move(ghost2_dir);
     Beep(400,150);
     system("cls");
-    print_grid();
+    print_layout();
 
 
  }
