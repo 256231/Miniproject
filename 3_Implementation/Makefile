@@ -1,7 +1,9 @@
 # Name of the project
 PROJECT_NAME = Pacman
 
+TEST_PROJ_NAME = Test_$(PROJ_NAME)
 
+BUILD_DIR = Build
 
 # All source code files
 SRC = src/ghost12dir.c
