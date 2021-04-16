@@ -51,6 +51,7 @@ This is a general SWOT analysis for not only PACMAN, but also all the Video game
 # Detail requirements
 ## High Level Requirements:
 |    ID      | Description                                     |  Status(Implemented/Failure)  |
+|----------------------------------------------------------------------------------------------|
 |    HL1     | Random movement of ghosts                       | Implemented                   |
 |    HL2     | Movement of pacman according to User input      | Implemented                   |
 
@@ -58,6 +59,7 @@ This is a general SWOT analysis for not only PACMAN, but also all the Video game
 
 ##  Low level Requirements:
 |    ID      | Description                              |  Status(Implemented/Failure)  |
+|------------|------------------------------------------|-------------------------------|
 |    LL1     | call to ghost12dir()                     | Implemented                   |
 |    LL2     | print pacman playing console on o/p      | Implemented                   |
 |    LL3     | Placing of food pallets                  | Future                        |
