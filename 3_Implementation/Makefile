@@ -32,28 +32,25 @@ endif
 # Makefile will not run target command if the name with file already exists. To override, use .PHONY
 .PHONY : all test coverage run clean doc
 
-all: $(SRC) $(BUILD)
-	gcc $(SRC) $(INC) -o $(PROJECT_OUTPUT) -lm
+all:$(BUILD_DIR)
+	gcc main.c $(SRC) $(INC) -lm -o $(call FixPath,$(PROJ_NAME).$(EXEC))
 
-# Call `make run` to run the application
-run:$(PROJECT_NAME)
-	./$(PROJECT_OUTPUT)
+run: all
+	$(call FixPath,./$(PROJ_NAME).$(EXEC))
 
-# Document the code using Doxygen
-doc:
-	make -C ./documentation
+test: $(SRC) $(TEST_SRC)
+	gcc $(SRC) $(TEST_SRC) $(INC) -lm -o $(TEST_PROJ_NAME).$(EXEC)
+	./$(TEST_PROJ_NAME).$(EXEC)
 
-# Build and run the unit tests
-test:$(BUILD)
-	gcc $(TEST_SRC) $(INC) -o $(TEST_OUTPUT)  -lm
-	./$(TEST_OUTPUT)
+coverage:${PROJECT_NAME}
+	gcc -fprofile-arcs -ftest-coverage $(SRC) $(TEST_SRC) $(INC) -lm -o $(call FixPath,$(TEST_PROJ_NAME).$(EXEC))
+	$(call FixPath,./$(TEST_PROJ_NAME).$(EXEC))
+	gcov -a main.c
+	$(RM) *.gcda
+	$(RM) *.gcno
 
-# Remove all the built files, invoke by `make clean`
+valgrind: all
+	valgrind ./$(TEST_PROJ_NAME).$(EXEC)
 clean:
-	del *.DAT
-	del *.$(EXEC)
-	rm -rf $(BUILD) $(DOCUMENTATION_OUTPUT)
-
-# Create new build folder if not present
-$(BUILD):
-	mkdir build
+	$(RM) *.gcda
+	$(RM) *.gcno
