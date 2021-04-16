@@ -19,7 +19,7 @@ Folder             | Description
 
 PS No. |  Name   |    Features         | Issuess Raised |Issues Resolved|No Test Cases|Test Case Pass
 -------|---------|---------------------|----------------|---------------|-------------|--------------
-256231 | SWATHI  |     All             | NA             | NA            | 2           | 2   
+256231 | SWATHI  |     All             |  1             | 1             | 2           | 2   
     
 
 ## Challenges Faced and How Was It Overcome
