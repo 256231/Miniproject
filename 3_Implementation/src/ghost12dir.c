@@ -33,6 +33,7 @@ int ghost1_direction(int a)
         ghost1_dir=RIGHT1;
         return 1;
 }
+
 int ghost2_direction(int ghost22)
     {
         int ghost2;
