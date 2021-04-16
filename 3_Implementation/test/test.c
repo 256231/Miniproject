@@ -9,18 +9,17 @@ void ghost1_direction_test()
 {
     TEST_ASSERT_EQUAL(1,ghost1_direction(1));
 }
-
 void ghost2_direction_test()
-    {
-        TEST_ASSERT_EQUAL(0,!(isdigit(ghost2_direction(1)));
-    }
+{
+    TEST_ASSERT_EQUAL(0,!(isdigit(ghost1_direction(1))));
+}
+
 
 int main()
 {
    UNITY_BEGIN();
     RUN_TEST(ghost1_direction_test);
     RUN_TEST(ghost2_direction_test);
-    RUN_TEST();
     return UNITY_END();
 
 }
