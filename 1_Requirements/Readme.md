@@ -4,7 +4,7 @@
  --- Pac-Man is an arcade video game developed by Toru Iwatani and produced by Namco. It is one of the most famous classic video game. Pacman is basically a maze chase video game where, in a classic game, a yellow disc is represented by pacman must consume all the food on its way without colliding with roaming ghosts. The original game contains levels till 256. Here's a mini version of the pacman game where the player has to keep dodging ghosts and navigate in the remaining field.
 
 ## Research
-![Original pacman UI](https://www.google.com/search?q=pacman&rlz=1C1CHBF_enIN916IN916&sxsrf=ALeKk037_lpMAKVeZ9nr0QlCQ3T9yBz8Kg:1618509061820&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiB5ceN6IDwAhWO-HMBHXxmCc0Q_AUoAXoECAEQAw&biw=1280&bih=578#imgrc=q-SCciHA-U7wGM)
+![Original pacman UI](https://github.com/256231/Miniproject/blob/main/1_Requirements/unnamed%20(1).png)
 
 ## Cost and Features
 -- The cost of the project is mostly determined by how much time the developers spend writing code to execute the functions. 

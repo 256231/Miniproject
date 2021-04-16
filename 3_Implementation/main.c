@@ -986,7 +986,7 @@ char ch;
 int a=1;
 
  print_layout();
-int qwe = ghost1_direction(a);
+ ghost1_direction();
 ghost22 = ghost2_direction(ghost22);
 
  while(count)
