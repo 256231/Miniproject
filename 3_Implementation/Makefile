@@ -6,6 +6,8 @@ PROJECT_NAME = Pacman
 # All source code files
 SRC = src/ghost12dir.c
 
+COV_SRC = test.c
+
 
 # All test source files
 TEST_SRC = test/test.c\
@@ -13,8 +15,8 @@ unity/unity.c
 
 
 
-INC_H = inc
-INC_T = unity
+INC = -Iinc\
+-Iunity
 
 #To check if the OS is Windows or Linux and set the executable file extension and delete command accordingly
 ifdef OS
@@ -42,21 +44,16 @@ test: $(SRC) $(TEST_SRC)
 	gcc $(SRC) $(TEST_SRC) $(INC) -lm -o $(TEST_PROJ_NAME).$(EXEC)
 	./$(TEST_PROJ_NAME).$(EXEC)
 
-coverage:
-	cp test/test.c .
-	gcc -fprofile-arcs -ftest-coverage -I $(INC_H) -I $(INC_T) unity/unity.c test.c $(SRC) -o $(call FixPath, $(TEST_OUTPUT).$(EXEC)) -lm
-	$(call FixPath, ./$(TEST_OUTPUT).$(EXEC))
-	gcov -a $(COV_SRC)
-	$(RM) *.$(EXEC)
+coverage:${PROJECT_NAME}
+	gcc -fprofile-arcs -ftest-coverage $(SRC) $(TEST_SRC) $(INC) -lm -o $(call FixPath,$(TEST_PROJ_NAME).$(EXEC))
+	$(call FixPath,./$(TEST_PROJ_NAME).$(EXEC))
+	gcov -a main.c
 	$(RM) *.gcda
 	$(RM) *.gcno
-	$(RM) *.c.gcov
-	$(RM) *.DAT
-	$(RM) test.c
 
 valgrind: all
 	valgrind ./$(TEST_PROJ_NAME).$(EXEC)
-
 clean:
 	$(RM) *.gcda
 	$(RM) *.gcno
+
