@@ -5,6 +5,7 @@
 
 ## Research
 ![Original pacman UI](https://github.com/256231/Miniproject/blob/main/1_Requirements/unnamed%20(1).png)
+
 ---In 1980 the Japanese arcade game manufacturer Namco Limited introduced the world to Pac-Man. Iwatani hoped that Namco could market an arcade game that appealed to females by paying close attention to themes, design, and colours. In contrast to the shooting of space aliens and other enemies that dominated most arcade games at the time, the game design was influenced by food and eating. Instead, players used a joystick to navigate a basic maze, devouring coloured dots until they were all gone, completing a level and moving on to the next maze. Originally this game contained 256 levels of which the last level is unsolveable as there was some error in designing.
 
 ## Cost and Features
