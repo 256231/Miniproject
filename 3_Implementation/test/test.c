@@ -1,6 +1,7 @@
 #include"unity.h"
 #include"unity_internals.h"
 #include"header.h"
+#include <ctype.h>
 /* Required by the unity test framework */
 void setUp(){}
 /* Required by the unity test framework */
