@@ -13,8 +13,8 @@
 
 
 int row1,col1,row2,col2;
-int row1ghost, col1ghost;
-int row2ghost,col2ghost,ghost11,ghost22;
+int row1ghost, col1ghost;//declaring coordinate variables of ghost 1
+int row2ghost,col2ghost,ghost11,ghost22;//declaring coordinatee variables of ghost 2 and declaring direction variables for ghost 1 and 2
 
 
 char layout[ROW][COL]= {
@@ -38,7 +38,9 @@ char layout[ROW][COL]= {
 "*   *                          *   *                            *     *",
 "*   ****************************   ******************************     *",
 "*                 $                                                   *",
-"***********************************************************************"};
+"***********************************************************************"};//Game layout (grid)
+
+//to print the layout on screen
 void print_layout()
 {   
     int i;
@@ -52,6 +54,8 @@ void print_layout()
     
 
 }
+
+//function to move pacman
 void move_car(enum move dir)
 {
     if(dir==UP)
@@ -108,6 +112,8 @@ void move_car(enum move dir)
        }
     }
 }
+
+//function to move ghost 1
 void ghost1_move(enum ghost_move g1_dir)
 {
  // Beep(200,200);
@@ -566,7 +572,7 @@ void ghost1_move(enum ghost_move g1_dir)
   }
 }
 
-
+//function to move ghost 2
 void ghost2_move(enum ghost_move g2_dir)
 {
  //Beep(200,250);
@@ -968,6 +974,8 @@ void ghost2_move(enum ghost_move g2_dir)
        }
      }
 }
+
+//driver function
 int main()
 {
 direction= STOP;
@@ -986,9 +994,10 @@ char ch;
 int a=1;
 
  print_layout();
- ghost1_direction();
-ghost22 = ghost2_direction(ghost22);
+ ghost1_direction(); //randomly generate ghost 1's movement
+ghost22 = ghost2_direction(ghost22); // randomly generate ghost 2's movement
 
+//inputs for respective directional movements of player's pacman
  while(count)
  {
     
@@ -1030,6 +1039,8 @@ ghost22 = ghost2_direction(ghost22);
         printf("\nGAME OVER\n");
         break;
     }
+
+    //function call for moving pacman in given direction
     move_car(direction);
    // ghost_direction();
     ghost1_move(ghost1_dir);
