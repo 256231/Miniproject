@@ -34,36 +34,26 @@ endif
 # Makefile will not run target command if the name with file already exists. To override, use .PHONY
 .PHONY : all test coverage run clean doc
 
-all:
-	gcc -I $(INC_H) $(SRC) main.c -o $(call FixPath,$(PROJ_NAME).$(EXEC))
-	
-run:
-	$(call FixPath,$(PROJ_NAME).$(EXEC))
-test:
-	gcc -I $(INC_H) -I $(INC_T) $(TEST_SRC) $(SRC) -o $(call FixPath,$(TEST_PROJ_NAME).$(EXEC))
-	./$(call FixPath,$(TEST_PROJ_NAME).$(EXEC))
+all:$(BUILD_DIR)
+	gcc main.c $(SRC) $(INC) -lm -o $(call FixPath,$(PROJ_NAME).$(EXEC))
 
+run: all
+	$(call FixPath,./$(PROJ_NAME).$(EXEC))
 
-#Coverage	
-coverage:$(BUILD_DIR)
-	gcc $(TEST_SRC) $(SRC) $(INC) -fprofile-arcs -ftest-coverage -lm -o $(call FixPath,$(BUILD_DIR)/$(TEST_PROJ_NAME).$(EXEC))
-	$(call FixPath,$(BUILD_DIR)/$(TEST_PROJ_NAME).$(EXEC))
-   #perform gcov -a *.gcno to check coverage
+test: $(SRC) $(TEST_SRC)
+	gcc $(SRC) $(TEST_SRC) $(INC) -lm -o $(TEST_PROJ_NAME).$(EXEC)
+	./$(TEST_PROJ_NAME).$(EXEC)
 
-
-cppcheck:
-	cppcheck --enable=all $(SRC) main.c
-debug:
-	gcc -I $(INC_H) $(SRC) main.c -g -o $(PROJ_NAME).$(EXEC)
-	gdb $(PROJ_NAME).$(EXEC)
-
-valgrind:
-	valgrind ./$(TEST_PROJ_NAME).$(EXEC)
-
-
-clean:
-	$(RM) *.DAT
-	$(RM) *.$(EXEC)
+coverage:${PROJECT_NAME}
+	gcc -fprofile-arcs -ftest-coverage $(SRC) $(TEST_SRC) $(INC) -lm -o $(call FixPath,$(TEST_PROJ_NAME).$(EXEC))
+	$(call FixPath,./$(TEST_PROJ_NAME).$(EXEC))
+	gcov -a main.c
 	$(RM) *.gcda
 	$(RM) *.gcno
-	$(RM) *.c.gcov
+
+valgrind: all
+	valgrind ./$(TEST_PROJ_NAME).$(EXEC)
+clean:
+	$(RM) *.gcda
+	$(RM) *.gcno
+
