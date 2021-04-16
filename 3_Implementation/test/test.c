@@ -12,7 +12,7 @@ void ghost1_direction_test()
 }
 void ghost2_direction_test()
 {
-    TEST_ASSERT_EQUAL(0,!(isdigit(ghost1_direction(1))));
+    TEST_ASSERT_EQUAL(1,!(isdigit(ghost1_direction(1))));
 }
 
 
