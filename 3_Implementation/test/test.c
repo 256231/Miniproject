@@ -8,7 +8,7 @@ void setUp(){}
 void tearDown(){}
 void ghost1_direction_test()
 {
-    TEST_ASSERT_EQUAL(1,ghost1_direction(1));
+    TEST_ASSERT_EQUAL(1,ghost1_direction());
 }
 void ghost2_direction_test()
 {
@@ -22,5 +22,4 @@ int main()
     RUN_TEST(ghost1_direction_test);
     RUN_TEST(ghost2_direction_test);
     return UNITY_END();
-
 }
