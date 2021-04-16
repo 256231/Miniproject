@@ -6,6 +6,8 @@ PROJECT_NAME = Pacman
 # All source code files
 SRC = src/ghost12dir.c
 
+COV_SRC = test.c
+
 
 # All test source files
 TEST_SRC = test/test.c\
